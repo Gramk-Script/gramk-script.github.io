@@ -8,7 +8,7 @@
     <link href="/2025/07/10/%E7%BD%91%E7%AB%99%E5%B4%A9%E6%BA%83%E8%AE%B0/"/>
     <url>/2025/07/10/%E7%BD%91%E7%AB%99%E5%B4%A9%E6%BA%83%E8%AE%B0/</url>
     
-    <content type="html"><![CDATA[<p>之前用清欢云虚拟主机搭建了个网站，结果虚拟主机炸了，于是回归Hexo静态博客了，这次一个托管到Netlify上，一个托管到CloudFlare Pages上，应该“不”会炸了吧<br><img src="https://pic1.imgdb.cn/item/68636d7458cb8da5c881efdb.png" alt="111.png"><br>网站：<br>Netlify：gramk.netlify.app<br>blog.lovegramk.dpdns.org（准确来说这个也是CloudFlare上的，用的CloudFlare CDN）<br>CloudFlare：<br>gramk-script-github-io.pages.dev（不建议访问）<br><a href="http://www.lovegramk.dpdns.org/">www.lovegramk.dpdns.org</a><br>GitHub Pages：<br>gramk-script.github.io</p>]]></content>
+    <content type="html"><![CDATA[<p>之前用清欢云虚拟主机搭建了个网站，结果虚拟主机炸了，于是回归Hexo静态博客了，这次一个托管到Netlify上，一个托管到CloudFlare Pages上，应该“不”会炸了吧<br><img src="https://pic1.imgdb.cn/item/68636d7458cb8da5c881efdb.png" alt="111.png"><br>网站：<br>Netlify：gramk.netlify.app<br>blog.lovegramk.dpdns.org<br>CloudFlare：<br>gramk-script-github-io.pages.dev（不建议访问）<br>gmkblog.dpdns.org</p>]]></content>
     
     
     
