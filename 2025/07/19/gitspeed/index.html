@@ -19,23 +19,23 @@
   <meta name="author" content="Gramk_Script_RHD">
   <meta name="keywords" content="">
   
-    <meta name="description" content="之前用清欢云虚拟主机搭建了个网站，结果虚拟主机炸了，于是回归Hexo静态博客了，这次一个托管到Netlify上，一个托管到CloudFlare Pages上，应该“不”会炸了吧网站：Netlify：gramk.netlify.appblog.lovegramk.dpdns.orgCloudFlare：gramk-script-github-io.pages.dev（不建议访问）gmkblog.dp">
+    <meta name="description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速addEventListener(‘fetch’, event &#x3D;&amp;gt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网站崩溃记">
-<meta property="og:url" content="http://gmkblog.dpdns.org/2025/07/10/%E7%BD%91%E7%AB%99%E5%B4%A9%E6%BA%83%E8%AE%B0/index.html">
+<meta property="og:title" content="使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问">
+<meta property="og:url" content="http://gmkblog.dpdns.org/2025/07/19/gitspeed/index.html">
 <meta property="og:site_name" content="Gramk&#39;s Home">
-<meta property="og:description" content="之前用清欢云虚拟主机搭建了个网站，结果虚拟主机炸了，于是回归Hexo静态博客了，这次一个托管到Netlify上，一个托管到CloudFlare Pages上，应该“不”会炸了吧网站：Netlify：gramk.netlify.appblog.lovegramk.dpdns.orgCloudFlare：gramk-script-github-io.pages.dev（不建议访问）gmkblog.dp">
+<meta property="og:description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速addEventListener(‘fetch’, event &#x3D;&amp;gt">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic1.imgdb.cn/item/68636d7458cb8da5c881efdb.png">
-<meta property="article:published_time" content="2025-07-10T07:29:28.000Z">
-<meta property="article:modified_time" content="2025-07-11T06:28:02.376Z">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/687b4c1858cb8da5c8c6b117.jpg">
+<meta property="article:published_time" content="2025-07-19T07:31:56.000Z">
+<meta property="article:modified_time" content="2025-07-19T07:44:54.342Z">
 <meta property="article:author" content="Gramk_Script_RHD">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic1.imgdb.cn/item/68636d7458cb8da5c881efdb.png">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/687b4c1858cb8da5c8c6b117.jpg">
   
   
   
-  <title>网站崩溃记 - Gramk&#39;s Home</title>
+  <title>使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问 - Gramk&#39;s Home</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网站崩溃记"></span>
+            <span id="subtitle" data-typed-text="使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-07-10 15:29" pubdate>
-          2025年7月10日 下午
+        <time datetime="2025-07-19 15:31" pubdate>
+          2025年7月19日 下午
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          80 字
+          987 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -272,12 +272,63 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">网站崩溃记</h1>
+            <h1 id="seo-header">使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问</h1>
             
             
               <div class="markdown-body">
                 
-                <p>之前用清欢云虚拟主机搭建了个网站，结果虚拟主机炸了，于是回归Hexo静态博客了，这次一个托管到Netlify上，一个托管到CloudFlare Pages上，应该“不”会炸了吧<br><img src="https://pic1.imgdb.cn/item/68636d7458cb8da5c881efdb.png" srcset="/img/loading.gif" lazyload alt="111.png"><br>网站：<br>Netlify：gramk.netlify.app<br>blog.lovegramk.dpdns.org<br>CloudFlare：<br>gramk-script-github-io.pages.dev（不建议访问）<br>gmkblog.dpdns.org</p>
+                <p>Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）<br>第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速<br>addEventListener(‘fetch’, event &#x3D;&gt; {<br>  event.respondWith(handleRequest(event.request))<br>})</p>
+<p>async function handleRequest(request) {<br>  const url &#x3D; new URL(request.url)<br>  &#x2F;&#x2F; 目标域名（可替换为镜像站）<br>  let target &#x3D; ‘<a target="_blank" rel="noopener" href="https://github.com/">https://github.com</a>‘</p>
+<p>  &#x2F;&#x2F; 处理路径（可选：移除自定义前缀）<br>  let path &#x3D; url.pathname.replace(&#x2F;^/gh-proxy/&#x2F;, ‘’) </p>
+<p>  &#x2F;&#x2F; 构建新请求<br>  const newUrl &#x3D; <code>$&#123;target&#125;/$&#123;path&#125;$&#123;url.search&#125;</code><br>  const newRequest &#x3D; new Request(newUrl, {<br>    method: request.method,<br>    headers: request.headers,<br>    body: request.body,<br>    redirect: ‘follow’<br>  })</p>
+<p>  &#x2F;&#x2F; 修改请求头<br>  newRequest.headers.set(‘Host’, ‘github.com’)<br>  newRequest.headers.delete(‘Referer’)</p>
+<p>  try {<br>    const response &#x3D; await fetch(newRequest)<br>    &#x2F;&#x2F; 修改响应头（允许跨域）<br>    const newResponse &#x3D; new Response(response.body, response)<br>    newResponse.headers.set(‘Access-Control-Allow-Origin’, ‘*’)<br>    newResponse.headers.set(‘Cache-Control’, ‘public, max-age&#x3D;14400’) &#x2F;&#x2F; 4小时缓存<br>    return newResponse<br>  } catch (e) {<br>    return new Response(‘Proxy error: ‘ + e.message, { status: 500 })<br>  }<br>}<br>第二个，下载加速，是一个开源仓库，原作者是GitHub的hunshcn<br>项目：<a target="_blank" rel="noopener" href="https://github.com/hunshcn/gh-proxy">https://github.com/hunshcn/gh-proxy</a><br>‘use strict’</p>
+<p>&#x2F;**</p>
+<ul>
+<li>static files (404.html, sw.js, conf.js)<br> <em>&#x2F;<br>const ASSET_URL &#x3D; ‘<a target="_blank" rel="noopener" href="https://hunshcn.github.io/gh-proxy/">https://hunshcn.github.io/gh-proxy/</a>‘<br>&#x2F;&#x2F; 前缀，如果自定义路由为example.com&#x2F;gh&#x2F;</em>，将PREFIX改为 ‘&#x2F;gh&#x2F;‘，注意，少一个杠都会错！<br>const PREFIX &#x3D; ‘&#x2F;‘<br>&#x2F;&#x2F; git使用cnpmjs镜像、分支文件使用jsDelivr镜像的开关，0为关闭，默认开启<br>const Config &#x3D; {<br> jsdelivr: 1,<br> cnpmjs: 1<br>}</li>
+</ul>
+<p>&#x2F;** @type {RequestInit} <em>&#x2F;<br>const PREFLIGHT_INIT &#x3D; {<br>    status: 204,<br>    headers: new Headers({<br>        ‘access-control-allow-origin’: ‘</em>‘,<br>        ‘access-control-allow-methods’: ‘GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS’,<br>        ‘access-control-max-age’: ‘1728000’,<br>    }),<br>}</p>
+<p>const exp1 &#x3D; &#x2F;^(?:https?://)?github.com/.+?/.+?/(?:releases|archive)/.<em>$&#x2F;i<br>const exp2 &#x3D; &#x2F;^(?:https?://)?github.com/.+?/.+?/(?:blob|raw)/.</em>$&#x2F;i<br>const exp3 &#x3D; &#x2F;^(?:https?://)?github.com/.+?/.+?/(?:info|git-).<em>$&#x2F;i<br>const exp4 &#x3D; &#x2F;^(?:https?://)?raw.(?:githubusercontent|github).com/.+?/.+?/.+?/.+$&#x2F;i<br>const exp5 &#x3D; &#x2F;^(?:https?://)?gist.(?:githubusercontent|github).com/.+?/.+?/.+$&#x2F;i<br>const exp6 &#x3D; &#x2F;^(?:https?://)?github.com/.+?/.+?/tags.</em>$&#x2F;i</p>
+<p>&#x2F;**</p>
+<ul>
+<li>@param {any} body</li>
+<li>@param {number} status</li>
+<li>@param {Object&lt;string, string&gt;} headers<br> <em>&#x2F;<br>function makeRes(body, status &#x3D; 200, headers &#x3D; {}) {<br> headers[‘access-control-allow-origin’] &#x3D; ‘</em>‘<br> return new Response(body, {status, headers})<br>}</li>
+</ul>
+<p>&#x2F;**</p>
+<ul>
+<li>@param {string} urlStr<br> *&#x2F;<br>function newUrl(urlStr) {<br> try {<br> return new URL(urlStr)<br> } catch (err) {<br> return null<br> }<br>}</li>
+</ul>
+<p>addEventListener(‘fetch’, e &#x3D;&gt; {<br>    const ret &#x3D; fetchHandler(e)<br>        .catch(err &#x3D;&gt; makeRes(‘cfworker error:\n’ + err.stack, 502))<br>    e.respondWith(ret)<br>})</p>
+<p>function checkUrl(u) {<br>    for (let i of [exp1, exp2, exp3, exp4, exp5, exp6 ]) {<br>        if (u.search(i) &#x3D;&#x3D;&#x3D; 0) {<br>            return true<br>        }<br>    }<br>    return false<br>}</p>
+<p>&#x2F;**</p>
+<ul>
+<li>@param {FetchEvent} e<br> *&#x2F;<br>async function fetchHandler(e) {<br> const req &#x3D; e.request<br> const urlStr &#x3D; req.url<br> const urlObj &#x3D; new URL(urlStr)<br> let path &#x3D; urlObj.searchParams.get(‘q’)<br> if (path) {<br> return Response.redirect(‘https:&#x2F;&#x2F;‘ + urlObj.host + PREFIX + path, 301)<br> }<br> &#x2F;&#x2F; cfworker 会把路径中的 <code>//</code> 合并成 <code>/</code><br> path &#x3D; urlObj.href.substr(urlObj.origin.length + PREFIX.length).replace(&#x2F;^https?:/+&#x2F;, ‘https:&#x2F;&#x2F;‘)<br> if (path.search(exp1) &#x3D;&#x3D;&#x3D; 0 || path.search(exp5) &#x3D;&#x3D;&#x3D; 0 || path.search(exp6) &#x3D;&#x3D;&#x3D; 0 || !Config.cnpmjs &amp;&amp; (path.search(exp3) &#x3D;&#x3D;&#x3D; 0 || path.search(exp4) &#x3D;&#x3D;&#x3D; 0)) {<br> return httpHandler(req, path)<br> } else if (path.search(exp2) &#x3D;&#x3D;&#x3D; 0) {<br> if (Config.jsdelivr) {<br>     const newUrl &#x3D; path.replace(‘&#x2F;blob&#x2F;‘, ‘@’).replace(&#x2F;^(?:https?://)?github.com&#x2F;, ‘<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh">https://cdn.jsdelivr.net/gh</a>‘)<br>     return Response.redirect(newUrl, 302)<br> } else {<br>     path &#x3D; path.replace(‘&#x2F;blob&#x2F;‘, ‘&#x2F;raw&#x2F;‘)<br>     return httpHandler(req, path)<br> }<br> } else if (path.search(exp3) &#x3D;&#x3D;&#x3D; 0) {<br> const newUrl &#x3D; path.replace(&#x2F;^(?:https?://)?github.com&#x2F;, ‘<a target="_blank" rel="noopener" href="https://github.com.cnpmjs.org/">https://github.com.cnpmjs.org</a>‘)<br> return Response.redirect(newUrl, 302)<br> } else if (path.search(exp4) &#x3D;&#x3D;&#x3D; 0) {<br> const newUrl &#x3D; path.replace(&#x2F;(?&lt;&#x3D;com/.+?/.+?)/(.+?/)&#x2F;, ‘@$1’).replace(&#x2F;^(?:https?://)?raw.(?:githubusercontent|github).com&#x2F;, ‘<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh">https://cdn.jsdelivr.net/gh</a>‘)<br> return Response.redirect(newUrl, 302)<br> } else {<br> return fetch(ASSET_URL + path)<br> }<br>}</li>
+</ul>
+<p>&#x2F;**</p>
+<ul>
+<li><p>@param {Request} req</p>
+</li>
+<li><p>@param {string} pathname<br> *&#x2F;<br>function httpHandler(req, pathname) {<br> const reqHdrRaw &#x3D; req.headers</p>
+<p> &#x2F;&#x2F; preflight<br> if (req.method &#x3D;&#x3D;&#x3D; ‘OPTIONS’ &amp;&amp;<br> reqHdrRaw.has(‘access-control-request-headers’)<br> ) {<br> return new Response(null, PREFLIGHT_INIT)<br> }</p>
+<p> const reqHdrNew &#x3D; new Headers(reqHdrRaw)</p>
+<p> let urlStr &#x3D; pathname<br> if (urlStr.startsWith(‘github’)) {<br> urlStr &#x3D; ‘https:&#x2F;&#x2F;‘ + urlStr<br> }<br> const urlObj &#x3D; newUrl(urlStr)</p>
+<p> &#x2F;** @type {RequestInit} *&#x2F;<br> const reqInit &#x3D; {<br> method: req.method,<br> headers: reqHdrNew,<br> redirect: ‘manual’,<br> body: req.body<br> }<br> return proxy(urlObj, reqInit)</p>
+</li>
+</ul>
+<p>}</p>
+<p>&#x2F;**<br> *</p>
+<ul>
+<li><p>@param {URL} urlObj</p>
+</li>
+<li><p>@param {RequestInit} reqInit<br> *&#x2F;<br>async function proxy(urlObj, reqInit) {<br> const res &#x3D; await fetch(urlObj.href, reqInit)<br> const resHdrOld &#x3D; res.headers<br> const resHdrNew &#x3D; new Headers(resHdrOld)</p>
+<p> const status &#x3D; res.status</p>
+<p> if (resHdrNew.has(‘location’)) {<br> let _location &#x3D; resHdrNew.get(‘location’)<br> if (checkUrl(_location))<br>     resHdrNew.set(‘location’, PREFIX + _location)<br> else {<br>     reqInit.redirect &#x3D; ‘follow’<br>     return proxy(newUrl(_location), reqInit)<br> }<br> }<br> resHdrNew.set(‘access-control-expose-headers’, ‘<em>‘)<br> resHdrNew.set(‘access-control-allow-origin’, ‘</em>‘)</p>
+<p> resHdrNew.delete(‘content-security-policy’)<br> resHdrNew.delete(‘content-security-policy-report-only’)<br> resHdrNew.delete(‘clear-site-data’)</p>
+<p> return new Response(res.body, {<br> status,<br> headers: resHdrNew,<br> })</p>
+</li>
+</ul>
+<p>}<br>展示一下访问效果<br><img src="https://pic1.imgdb.cn/item/687b4c1858cb8da5c8c6b117.jpg" srcset="/img/loading.gif" lazyload alt="1"><br>把以上代码复制粘贴到Workers的代码编辑器里，然后用自带子域or你绑定的域名访问就行了</p>
 
                 
               </div>
@@ -295,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网站崩溃记</div>
-      <div>http://gmkblog.dpdns.org/2025/07/10/网站崩溃记/</div>
+      <div>使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问</div>
+      <div>http://gmkblog.dpdns.org/2025/07/19/gitspeed/</div>
     </div>
     <div class="license-meta">
       
@@ -308,7 +359,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年7月10日</div>
+          <div>2025年7月19日</div>
         </div>
       
       
@@ -340,15 +391,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/07/19/gitspeed/" title="使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2025/07/10/%E7%BD%91%E7%AB%99%E5%B4%A9%E6%BA%83%E8%AE%B0/" title="网站崩溃记">
+                        <span class="hidden-mobile">网站崩溃记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
