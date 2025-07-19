@@ -19,16 +19,16 @@
   <meta name="author" content="Gramk_Script_RHD">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速addEventListener(‘fetch’, event &#x3D;&amp;gt">
+    <meta name="description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样） 第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速 addEventListener(‘fetch’, event &#x3D;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用CloudFlare Workers搭建GitHub Proxy加速GitHub访问">
 <meta property="og:url" content="http://gmkblog.dpdns.org/2025/07/19/gitspeed/index.html">
 <meta property="og:site_name" content="Gramk&#39;s Home">
-<meta property="og:description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速addEventListener(‘fetch’, event &#x3D;&amp;gt">
+<meta property="og:description" content="Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样） 第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速 addEventListener(‘fetch’, event &#x3D;&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic1.imgdb.cn/item/687b4c1858cb8da5c8c6b117.jpg">
 <meta property="article:published_time" content="2025-07-19T07:31:56.000Z">
-<meta property="article:modified_time" content="2025-07-19T07:44:54.342Z">
+<meta property="article:modified_time" content="2025-07-19T07:50:01.487Z">
 <meta property="article:author" content="Gramk_Script_RHD">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic1.imgdb.cn/item/687b4c1858cb8da5c8c6b117.jpg">
@@ -277,12 +277,17 @@
             
               <div class="markdown-body">
                 
-                <p>Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）<br>第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速<br>addEventListener(‘fetch’, event &#x3D;&gt; {<br>  event.respondWith(handleRequest(event.request))<br>})</p>
+                <p>Github在国内其实没有被墙，但由于GitHub的DNS污染，导致很多人无法访问，虽然可以修改hosts，但是对于小白来说很不友好，同时FastGitHub的仓库已经停更了，Watt Toolkit不知道什么回事，一加速就蓝屏（不知道你们这不这样）</p>
+<p><em>第一个，我个人研究的，似乎只能进行访问加速，但我试了一下直链可以加速</em></p>
+<p>addEventListener(‘fetch’, event &#x3D;&gt; {<br>  event.respondWith(handleRequest(event.request))<br>})</p>
 <p>async function handleRequest(request) {<br>  const url &#x3D; new URL(request.url)<br>  &#x2F;&#x2F; 目标域名（可替换为镜像站）<br>  let target &#x3D; ‘<a target="_blank" rel="noopener" href="https://github.com/">https://github.com</a>‘</p>
 <p>  &#x2F;&#x2F; 处理路径（可选：移除自定义前缀）<br>  let path &#x3D; url.pathname.replace(&#x2F;^/gh-proxy/&#x2F;, ‘’) </p>
 <p>  &#x2F;&#x2F; 构建新请求<br>  const newUrl &#x3D; <code>$&#123;target&#125;/$&#123;path&#125;$&#123;url.search&#125;</code><br>  const newRequest &#x3D; new Request(newUrl, {<br>    method: request.method,<br>    headers: request.headers,<br>    body: request.body,<br>    redirect: ‘follow’<br>  })</p>
 <p>  &#x2F;&#x2F; 修改请求头<br>  newRequest.headers.set(‘Host’, ‘github.com’)<br>  newRequest.headers.delete(‘Referer’)</p>
-<p>  try {<br>    const response &#x3D; await fetch(newRequest)<br>    &#x2F;&#x2F; 修改响应头（允许跨域）<br>    const newResponse &#x3D; new Response(response.body, response)<br>    newResponse.headers.set(‘Access-Control-Allow-Origin’, ‘*’)<br>    newResponse.headers.set(‘Cache-Control’, ‘public, max-age&#x3D;14400’) &#x2F;&#x2F; 4小时缓存<br>    return newResponse<br>  } catch (e) {<br>    return new Response(‘Proxy error: ‘ + e.message, { status: 500 })<br>  }<br>}<br>第二个，下载加速，是一个开源仓库，原作者是GitHub的hunshcn<br>项目：<a target="_blank" rel="noopener" href="https://github.com/hunshcn/gh-proxy">https://github.com/hunshcn/gh-proxy</a><br>‘use strict’</p>
+<p>  try {<br>    const response &#x3D; await fetch(newRequest)<br>    &#x2F;&#x2F; 修改响应头（允许跨域）<br>    const newResponse &#x3D; new Response(response.body, response)<br>    newResponse.headers.set(‘Access-Control-Allow-Origin’, ‘*’)<br>    newResponse.headers.set(‘Cache-Control’, ‘public, max-age&#x3D;14400’) &#x2F;&#x2F; 4小时缓存<br>    return newResponse<br>  } catch (e) {<br>    return new Response(‘Proxy error: ‘ + e.message, { status: 500 })<br>  }<br>}</p>
+<p><em>第二个，下载加速，是一个开源仓库，原作者是GitHub的hunshcn</em></p>
+<p>项目：<a target="_blank" rel="noopener" href="https://github.com/hunshcn/gh-proxy">https://github.com/hunshcn/gh-proxy</a></p>
+<p>‘use strict’</p>
 <p>&#x2F;**</p>
 <ul>
 <li>static files (404.html, sw.js, conf.js)<br> <em>&#x2F;<br>const ASSET_URL &#x3D; ‘<a target="_blank" rel="noopener" href="https://hunshcn.github.io/gh-proxy/">https://hunshcn.github.io/gh-proxy/</a>‘<br>&#x2F;&#x2F; 前缀，如果自定义路由为example.com&#x2F;gh&#x2F;</em>，将PREFIX改为 ‘&#x2F;gh&#x2F;‘，注意，少一个杠都会错！<br>const PREFIX &#x3D; ‘&#x2F;‘<br>&#x2F;&#x2F; git使用cnpmjs镜像、分支文件使用jsDelivr镜像的开关，0为关闭，默认开启<br>const Config &#x3D; {<br> jsdelivr: 1,<br> cnpmjs: 1<br>}</li>
